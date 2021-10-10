@@ -1,0 +1,4 @@
+(library
+ (name orgeat)
+ (public_name orgeat)
+ (libraries zarith data-encoding smol))
