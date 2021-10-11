@@ -14,10 +14,10 @@
  (description "Ocaml Random Generation of Arbitrary Types")
  (license MIT)
  (depends (dune (>= 2.8))
- 	  (ocaml (>= 4.08.0))
-	  zarith
-	  data-encoding
-	  smol
-	  (smol.helpers :with-test)
-    	  (alcotest :with-test))
+ 	  (ocaml (>= 4.12.0))
+	  (zarith (>= 1.11))
+	  (data-encoding (>= 0.4))
+	  (smol (>= 0.0.1))
+	  (smol-helpers (and :with-test (>= 0.0.1)))
+    	  (alcotest (and :with-test (>= 1.4.0))))
 )

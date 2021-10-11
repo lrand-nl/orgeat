@@ -23,7 +23,7 @@ module Float_64_config : CONFIG = struct
 
   let name = "float_64"
 
-  let epsilon = K.inv (K.mul_int 10000000000 K.one)
+  let epsilon = K.of_Q (Q.of_float 1e-10)
 end
 
 module Float_256_config : CONFIG = struct
@@ -31,7 +31,7 @@ module Float_256_config : CONFIG = struct
 
   let name = "float_256"
 
-  let epsilon = K.inv (K.mul_int 10000000000 K.one)
+  let epsilon = K.of_Q (Q.of_float 1e-10)
 end
 
 module TestEnvironment (Conf : CONFIG) = struct

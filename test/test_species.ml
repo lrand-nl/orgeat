@@ -1,10 +1,11 @@
 open Orgeat
 open Misc
+open Smol_helpers
 module K = Scalar.Q
 module S_ = Species.Make (K)
 module S = S_.S_base
-module Helpers = Smol.Test_helpers.Make (S)
-module Helpers_bool = Smol.Test_helpers.Make (Bool)
+module Helpers = Test_helpers.Make (S)
+module Helpers_bool = Test_helpers.Make (Bool)
 
 module Deg = struct
   type t = int option
@@ -29,7 +30,7 @@ module Deg = struct
     | None -> "None"
 end
 
-module Helpers_deg = Smol.Test_helpers.Make (Deg)
+module Helpers_deg = Test_helpers.Make (Deg)
 module PS = Poly_Class.Make_Ring (S)
 module Poly_VarK = Poly_Var.Make_Ring (K)
 module Mono_Var = Smol.Monomial.Make (Literal.Variable)
@@ -131,7 +132,7 @@ let s_base max_depth ?(p = true) () =
   a
 
 let (name_tests, tests_algebra) =
-  Smol.Test_helpers.make_tests_ring
+  Test_helpers.make_tests_ring
     ~ampli
     ~name:"Species"
     ~commutative:true
@@ -364,7 +365,7 @@ module Base = struct
       ~actual:dz_sa
 
   let tests =
-    let open Smol.Test_helpers in
+    let open Test_helpers in
     [
       (Rand, "Test map identity", test_fresh);
       (Rand, "∀ a. a[x->x] = a", test_substitution_id);
@@ -393,4 +394,4 @@ module Base = struct
 end
 
 let tests =
-  [(name_tests, tests_algebra @ Smol.Test_helpers.get_tests ampli Base.tests)]
+  [(name_tests, tests_algebra @ Test_helpers.get_tests ampli Base.tests)]

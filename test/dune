@@ -4,7 +4,7 @@
             zarith
 	    orgeat
 	    smol
-	    smol.helpers
+	    smol-helpers
 	    data-encoding))
 
 (rule
