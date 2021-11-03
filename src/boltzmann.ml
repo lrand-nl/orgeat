@@ -142,7 +142,8 @@ module Sampling (K : Scalar.S) = struct
           eval rs k (Boltzmann.one.gen K.one state) state
       | S_Z ->
           (* Size 1 *)
-          eval rs k (Boltzmann.z.gen K.one state) state
+          check_size ~max_size (rs + 1) ;
+          eval (rs + 1) k (Boltzmann.z.gen K.one state) state
       | S_Empty ->
           (* Note: this case should never be matched. *)
           eval rs k (Boltzmann.zero.gen K.one state) state
@@ -169,12 +170,10 @@ module Sampling (K : Scalar.S) = struct
       match k with
       | K_Empty -> (s, t)
       | K_Cons (K_Left (right_stub, app), krest) ->
-          check_size ~max_size (s + rs) ;
-          aux (s + rs) right_stub (K_Cons (K_Right (app (s, t)), krest)) state
+          aux rs right_stub (K_Cons (K_Right (app (s, t)), krest)) state
       | K_Cons (K_Right app, krest) ->
           let (s, t) = app (s, t) in
-          check_size ~max_size (s + rs) ;
-          eval (s + rs) krest (s, t) state
+          eval rs krest (s, t) state
       | K_Cons (K_Map tr, krest) ->
           (* We do not want maps to change the size of the objects anyways *)
           eval rs krest (s, tr t) state
